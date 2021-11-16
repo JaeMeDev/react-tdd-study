@@ -4,11 +4,6 @@ import { OrderContextProvider } from "./contexts/OrderContext";
 import "./App.css";
 
 function App() {
-  let value = {
-    a: "a",
-    b: "b",
-  };
-
   return (
     <div style={{ padding: "4rem" }}>
       <OrderContextProvider>
