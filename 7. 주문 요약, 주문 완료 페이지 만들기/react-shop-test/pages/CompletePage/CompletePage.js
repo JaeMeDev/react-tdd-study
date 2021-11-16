@@ -15,8 +15,8 @@ function CompletePage({ setStep }) {
   const orderCompleted = async (OrderDatas) => {
     try {
       let response = await axios.post(
-          "http://localhost:5000/order",
-          OrderDatas
+        "http://localhost:5000/order",
+        OrderDatas
       );
       setOrderHistory(response.data);
       setLoading(false);
@@ -30,10 +30,10 @@ function CompletePage({ setStep }) {
   }
 
   const orderTable = orderHistory.map((item) => (
-      <tr key={item.orderNumber}>
-        <td>{item.orderNumber}</td>
-        <td>{item.price}</td>
-      </tr>
+    <tr key={item.orderNumber}>
+      <td>{item.orderNumber}</td>
+      <td>{item.price}</td>
+    </tr>
   ));
 
   const handleClick = () => {
@@ -45,20 +45,20 @@ function CompletePage({ setStep }) {
     return <div>loading</div>;
   } else {
     return (
-        <div style={{ textAlign: "center" }}>
-          <h2>주문이 성공했습니다.</h2>
-          <h3>지금까지 모든 주문</h3>
-          <table style={{ margin: "auto" }}>
-            <tbody>
+      <div style={{ textAlign: "center" }}>
+        <h2>주문이 성공했습니다.</h2>
+        <h3>지금까지 모든 주문</h3>
+        <table style={{ margin: "auto" }}>
+          <tbody>
             <tr>
               <th>주문 번호</th>
               <th>주문 가격</th>
             </tr>
             {orderTable}
-            </tbody>
-          </table>
-          <button onClick={handleClick}>첫페이지로</button>
-        </div>
+          </tbody>
+        </table>
+        <button onClick={handleClick}>첫페이지로</button>
+      </div>
     );
   }
 }
