@@ -6,7 +6,7 @@ test("update product's total when products change", async () => {
   render(<Type orderType="products" />);
 
   // 상품 총 가격 뒤에 어떤 텍스트가 있어도 불러온다.
-  const productsTotal = screen.getByText("총 가격", { exact: false });
+  const productsTotal = screen.getByText("상품 총 가격", { exact: false });
   expect(productsTotal).toHaveTextContent("0");
 
   // 아메리카 여행 상품 한개 올리기 / 서버에서 데이터 가져온 이후는 get이 아닌 find를 사용한다.
@@ -19,4 +19,30 @@ test("update product's total when products change", async () => {
   userEvent.clear(americaInput);
   userEvent.type(americaInput, "1");
   expect(productsTotal).toHaveTextContent("1000");
+});
+
+test("update option's total when options change", async () => {
+  render(<Type orderType="options" />);
+
+  const optionsTotal = screen.getByText("옵션 총 가격:", { exact: false });
+  expect(optionsTotal).toHaveTextContent("0");
+
+  const insuranceCheckBox = await screen.findByRole("checkbox", {
+    name: "Insurance",
+  });
+  userEvent.clear(insuranceCheckBox);
+  userEvent.click(insuranceCheckBox);
+
+  expect(optionsTotal).toHaveTextContent("500");
+
+  const dinnerCheckBox = await screen.findByRole("checkbox", {
+    name: "Dinner",
+  });
+  userEvent.clear(dinnerCheckBox);
+  userEvent.click(dinnerCheckBox);
+  expect(optionsTotal).toHaveTextContent("1000");
+
+  userEvent.clear(dinnerCheckBox);
+  userEvent.click(dinnerCheckBox);
+  expect(optionsTotal).toHaveTextContent("500");
 });
