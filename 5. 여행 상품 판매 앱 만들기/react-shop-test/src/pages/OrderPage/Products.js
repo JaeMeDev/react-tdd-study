@@ -5,7 +5,7 @@ const Products = ({ name, imagePath }) => {
     <div style={{ textAlign: "center" }}>
       <img
         style={{ width: "75%" }}
-        src={`http://localhost/${imagePath}`}
+        src={`http://localhost:5000/${imagePath}`}
         alt={`${name} product`}
       />
       <form style={{ marginTop: "10px" }}>
